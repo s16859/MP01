@@ -4,8 +4,8 @@ public class KlientOsobaFizyczna extends Klient {
 
     String daneOsobowe;
 
-    public KlientOsobaFizyczna(Long id,String daneKontaktowe,String daneOsobowe){
-        super(id,daneKontaktowe);
+    public KlientOsobaFizyczna(Long id,String daneKontaktowe,String daneOsobowe, Adres adres){
+        super(id,daneKontaktowe,adres);
         this.daneOsobowe=daneOsobowe;
         addToExtent(Klient.class,this);
     }

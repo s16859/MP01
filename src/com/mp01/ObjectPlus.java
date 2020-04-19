@@ -12,7 +12,6 @@ public class ObjectPlus implements Serializable {
     private static Map<Class, List<ObjectPlus>> allExtents = new HashMap<>();
 
     public static  <T> Iterable<T> getExtent(Class<T> type) {
-        loadExtent();
         if (allExtents.containsKey(type)) {
             return (Iterable<T>) allExtents.get(type);
         }
@@ -36,6 +35,14 @@ public class ObjectPlus implements Serializable {
     public static <T> void addToExtent(Class<T> type, List<ObjectPlus> extent) {
         allExtents.put(type,extent);
         saveExtent();
+    }
+
+
+    public static  <T> List<T> getByIndex(Class<T> type) {
+        if (allExtents.containsKey(type)) {
+            return (List<T>) allExtents.get(type);
+        }
+        return null;
     }
 
 

@@ -5,13 +5,14 @@ import java.util.Date;
 
 public class Zlecenie extends ObjectPlus implements Serializable{
 
-    Long id;
+    static Long id;
     String status="w trakcie realizacji";
     Date dataUtworzeniaZlecenia;
     Date dataZrealizowania=null;
     Przesylka przesylka;
 
     public Zlecenie(Przesylka przesylka){
+
         this.przesylka=przesylka;
         this.dataUtworzeniaZlecenia=new Date();
         addToExtent(this.getClass(),this);
@@ -39,7 +40,8 @@ public class Zlecenie extends ObjectPlus implements Serializable{
         return "Zlecenie{" +
                 "id=" + id +
                 ", status='" + status + '\'' +
-                ", dataWykonania=" + dataZrealizowania +
+                ", dataUtworzeniaZlecenia=" + dataUtworzeniaZlecenia +
+                ", dataZrealizowania=" + dataZrealizowania +
                 ", przesylka=" + przesylka +
                 '}';
     }

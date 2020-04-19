@@ -6,8 +6,8 @@ public class KlientFirma extends Klient {
            regon;
 
 
-    public KlientFirma(Long id,String daneKontaktowe,String nazwa,String regon){
-        super(id,daneKontaktowe);
+    public KlientFirma(Long id,String daneKontaktowe,String nazwa,String regon, Adres adres){
+        super(id,daneKontaktowe,adres);
         this.nazwa=nazwa;
         this.regon=regon;
         addToExtent(Klient.class,this);

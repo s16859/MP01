@@ -6,10 +6,12 @@ public abstract class Klient extends ObjectPlus{
 
     Long id;
     String daneKontaktowe;
+    Adres adres;
 
-    Klient(Long id,String daneKontaktowe){
+    Klient(Long id,String daneKontaktowe, Adres adres){
         this.id=id;
         this.daneKontaktowe=daneKontaktowe;
+        this.adres=adres;
     }
 
     public static void showThisExtent() {

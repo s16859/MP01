@@ -24,13 +24,13 @@ public class Przesylka extends ObjectPlus implements Serializable {
     private int wysokosc;
     private int pobranie=0;
 
-    public Przesylka(Long id,Long nadawca, Long adresat, String typ, int waga, int szerokosc, int dlugosc, int wysokosc){
+    public Przesylka(Long id,Long nadawca, Long adresat, String typ, int waga, int szerokosc, int dlugosc, int wysokosc, int koszt){
         this.id=id;
         this.nadawca=nadawca;
         this.adresat=adresat;
         this.typ=typ;
         this.waga=waga;
-        this.koszt=obliczKosztPrzesylki(szerokosc,dlugosc,wysokosc);
+        this.koszt=koszt;
         this.szerokosc=szerokosc;
         this.dlugosc=dlugosc;
         this.wysokosc=wysokosc;
@@ -43,7 +43,8 @@ public class Przesylka extends ObjectPlus implements Serializable {
     }
 
     public static void nadaniePrzesylki(Long id, Long nadawca, Long adresat, String typ, int waga, int szerokosc, int dlugosc, int wysokosc){
-        new Zlecenie(new Przesylka(id,nadawca,adresat,typ, waga, szerokosc, dlugosc, wysokosc));
+        int koszt=obliczKosztPrzesylki(szerokosc,dlugosc,wysokosc);
+        new Zlecenie(new Przesylka(id,nadawca,adresat,typ, waga, szerokosc, dlugosc, wysokosc,koszt));
     }
 
     public void anulowaniePrzesylki(){
@@ -69,6 +70,9 @@ public class Przesylka extends ObjectPlus implements Serializable {
             if(!p.getStatus().equals("Anulowana")){
                 newExtent.add(p);
             }
+            else{
+                System.out.println("Usunięto: "+p.toString());
+            }
         }
         addToExtent(Przesylka.class,newExtent);
     }
@@ -84,6 +88,7 @@ public class Przesylka extends ObjectPlus implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
+
 
     @Override
     public String toString() {

@@ -3,7 +3,7 @@ package com.mp01;
 public class Adres extends ObjectPlus{
 
     Long id;
-    Long klientId;
+    //Long klientId;
     String kraj,
     region,
     miasto,
@@ -11,7 +11,12 @@ public class Adres extends ObjectPlus{
     numer,
     kodPocztowy;
 
-    public Adres(){
+    public Adres(Long id,String miasto, String ulica, String numer,String kodPocztowy){
+        this.id=id;
+        this.miasto=miasto;
+        this.ulica=ulica;
+        this.numer=numer;
+        this.kodPocztowy=kodPocztowy;
         addToExtent(this.getClass(),this);
     }
 
