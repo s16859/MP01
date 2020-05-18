@@ -9,8 +9,9 @@ import java.util.List;
 public class Przesylka extends ObjectPlus implements Serializable {
 
     private Long id;
-    Long nadawca;
-    Long adresat;
+    private Klient nadawca;
+    private Klient adresat;
+    private List<Sortownia> sortownie = new ArrayList<>();
     private Date dataNadania = new Date();
     private Date dataDostarczenia = null;
     private static int kosztZaObjetosc = 1;
@@ -24,10 +25,8 @@ public class Przesylka extends ObjectPlus implements Serializable {
     private int wysokosc;
     private int pobranie=0;
 
-    public Przesylka(Long id,Long nadawca, Long adresat, String typ, int waga, int szerokosc, int dlugosc, int wysokosc, int koszt){
+    public Przesylka(Long id, String typ, int waga, int szerokosc, int dlugosc, int wysokosc, int koszt){
         this.id=id;
-        this.nadawca=nadawca;
-        this.adresat=adresat;
         this.typ=typ;
         this.waga=waga;
         this.koszt=koszt;
@@ -38,13 +37,44 @@ public class Przesylka extends ObjectPlus implements Serializable {
         addToExtent(this.getClass(),this);
     }
 
+    public void dodajSortownie(Sortownia sortownia){
+           sortownie.add(sortownia);
+    }
+
+
+    /*
+    public void setNadawca(Klient klient){
+        if(nadawca == null){
+            this.nadawca=klient;
+            klient.dodajNadanaPrzesylke(this);
+        }
+        else if(nadawca!=klient){
+            nadawca.usunNadana(this);
+            klient.dodajNadanaPrzesylke(this);
+            this.nadawca=klient;
+        }
+    }
+
+    public void setAdresat(Klient klient){
+        if(adresat == null){
+            this.adresat=klient;
+            klient.dodajAdresowanaPrzesylke(this);
+        }
+        else if(adresat!=klient){
+            adresat.usunAdresowana(this);
+            klient.dodajAdresowanaPrzesylke(this);
+            this.adresat=klient;
+        }
+    }*/
+
+
     public static void showThisExtent() {
         showExtent(Przesylka.class);
     }
 
-    public static void nadaniePrzesylki(Long id, Long nadawca, Long adresat, String typ, int waga, int szerokosc, int dlugosc, int wysokosc){
+    public static void nadaniePrzesylki(Long id, String typ, int waga, int szerokosc, int dlugosc, int wysokosc){
         int koszt=obliczKosztPrzesylki(szerokosc,dlugosc,wysokosc);
-        new Zlecenie(new Przesylka(id,nadawca,adresat,typ, waga, szerokosc, dlugosc, wysokosc,koszt));
+        new Zlecenie(new Przesylka(id,typ, waga, szerokosc, dlugosc, wysokosc,koszt));
     }
 
     public void anulowaniePrzesylki(){
@@ -89,7 +119,24 @@ public class Przesylka extends ObjectPlus implements Serializable {
         this.status = status;
     }
 
+    public Long getId() {
+        return id;
+    }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String toString() {
+        String res = "Przesylka: id=" + id + '\n';
+        res+="Sortownie w ktorcyh byla przesylka:";
+        for(Sortownia s : sortownie){
+            res+="\n";
+            res+=s.toString();
+        }
+        return res;
+    }
+    /*
     @Override
     public String toString() {
         return "Przesylka{" +
@@ -103,5 +150,5 @@ public class Przesylka extends ObjectPlus implements Serializable {
                 ", wysokosc=" + wysokosc +
                 ", pobranie=" + pobranie +
                 '}';
-    }
+    }*/
 }

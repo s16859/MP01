@@ -2,33 +2,43 @@ package com.mp01;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
-public class Samochod extends ObjectPlus{
+public class Samochod extends ObjectPlusPlus{
 
-    Long id;
-    String typ;
-    String marka;
-    int ladownosc;
-    int pojemnosc;
-    String nrRejestracyjny;
-    List<Long> przesylkiWsamochodzie = new ArrayList<>();
+    private Long id;
+    private String typ;
+    private String marka;
+    private int ladownosc;
+    private int pojemnosc;
+    private String nrRejestracyjny;
+    private List<KurierSamochod> kurierSamochod = new ArrayList<>();
 
-    public Samochod(){
+    public Samochod(Long id){
         addToExtent(this.getClass(),this);
     }
+
+    public void dodajKurierSamochod(KurierSamochod ks){
+        if(!kurierSamochod.contains(ks)){
+            kurierSamochod.add(ks);
+            ks.setSamochod(this);
+        }
+    }
+
+    public void usunKurierSamochod(KurierSamochod ks){
+        kurierSamochod.remove(ks);
+    }
+
 
     public static void showThisExtent() {
         showExtent(Samochod.class);
     }
 
-    public void dodajPrzesylke(Long id){
-        przesylkiWsamochodzie.add(id);
+    @Override
+    public String toString() {
+        return "Samochod{" +
+                "id=" + id +
+                '}';
     }
-
-    public void usunPrzesylke(Long id){
-        przesylkiWsamochodzie.remove(id);
-    }
-
-
-
 }

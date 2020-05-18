@@ -6,13 +6,14 @@ public class KlientFirma extends Klient {
            regon;
 
 
-    public KlientFirma(Long id,String daneKontaktowe,String nazwa,String regon, Adres adres){
-        super(id,daneKontaktowe,adres);
+    public KlientFirma(Long id,String daneKontaktowe,String nazwa,String regon){
+        super(id,daneKontaktowe);
         this.nazwa=nazwa;
         this.regon=regon;
         addToExtent(Klient.class,this);
     }
 
+    /*
     @Override
     public String toString() {
         return "KlientFirma{" +
@@ -21,5 +22,6 @@ public class KlientFirma extends Klient {
                 ", daneKontaktowe='" + daneKontaktowe + '\'' +
                 ", id=" + id +
                 '}';
-    }
+    }*/
+
 }
